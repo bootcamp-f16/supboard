@@ -1,9 +1,9 @@
-<form>
+<form ng-submit="supsEditCtrl.saveSup()">
     <div class="form-group">
         <label>
             Sup text
         </label>
-        <textarea class="form-control"></textarea>
+        <textarea ng-model="supsEditCtrl.editedSup.text" class="form-control"></textarea>
     </div>
     <button class="btn btn-primary" type="submit">
         Save sup

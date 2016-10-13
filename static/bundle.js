@@ -32804,7 +32804,7 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"row\">\n    <div class=\"col-md-4\">\n        <div class=\"jumbotron\">\n            <h1>Sup</h1>\n            <p class=\"lead\">\n                View the latest sups from about the world or add yours to the mix below.\n            </p>\n            <sups-edit />\n        </div>\n    </div>\n    <div class=\"col-md-8\">\n        <h2>\n            Latest Sups\n            <hr>\n        </h2>\n\n        <sups-item ng-repeat=\"sup in supsPageCtrl.sups\" sup=\"sup\" />\n    </div>\n</div>"
+	module.exports = "<div class=\"row\">\n    <div class=\"col-md-4\">\n        <div class=\"jumbotron\">\n            <h1>Sup</h1>\n            <p class=\"lead\">\n                View the latest sups from about the world or add yours to the mix below.\n            </p>\n            <sups-edit save=\"supsPageCtrl.saveSup(editedSup)\" />\n        </div>\n    </div>\n    <div class=\"col-md-8\">\n        <h2>\n            Latest Sups\n            <hr>\n        </h2>\n\n        <sups-item ng-repeat=\"sup in supsPageCtrl.sups\" sup=\"sup\" />\n    </div>\n</div>"
 
 /***/ },
 /* 9 */
@@ -32827,6 +32827,10 @@
 	
 	    getSups();
 	    $interval(getSups, 5000);
+	
+	    ctrl.saveSup = function saveSup(editedSup) {
+	        alert(editedSup.text);
+	    };
 	}
 	
 	exports.default = SupsPageController;
@@ -32904,6 +32908,9 @@
 	
 	var supsEditComponent = {
 	    template: _supsEdit2.default,
+	    bindings: {
+	        save: '&'
+	    },
 	    controller: _supsEdit4.default,
 	    controllerAs: 'supsEditCtrl'
 	};
@@ -32914,7 +32921,7 @@
 /* 14 */
 /***/ function(module, exports) {
 
-	module.exports = "<form>\n    <div class=\"form-group\">\n        <label>\n            Sup text\n        </label>\n        <textarea class=\"form-control\"></textarea>\n    </div>\n    <button class=\"btn btn-primary\" type=\"submit\">\n        Save sup\n    </button>\n</form>"
+	module.exports = "<form ng-submit=\"supsEditCtrl.saveSup()\">\n    <div class=\"form-group\">\n        <label>\n            Sup text\n        </label>\n        <textarea ng-model=\"supsEditCtrl.editedSup.text\" class=\"form-control\"></textarea>\n    </div>\n    <button class=\"btn btn-primary\" type=\"submit\">\n        Save sup\n    </button>\n</form>"
 
 /***/ },
 /* 15 */
@@ -32923,10 +32930,17 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	
-	function SupsEditController() {}
+	function SupsEditController() {
+	    var ctrl = this;
+	    ctrl.editedSup = {};
+	
+	    ctrl.saveSup = function saveSup() {
+	        ctrl.save({ editedSup: ctrl.editedSup });
+	    };
+	}
 	
 	exports.default = SupsEditController;
 
