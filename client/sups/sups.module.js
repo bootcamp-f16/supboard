@@ -9,7 +9,9 @@ import supsAPIService from './sups-api.service';
 
 const SupsModule = angular.module('sups', [
     'ngResource',
-])
+]).config(($resourceProvider) => {
+    $resourceProvider.defaults.stripTrailingSlashes = false;
+})
     .factory('supsAPIService', supsAPIService)
     .component('supsPage', supsPageComponent)
     .component('supsEdit', supsEditComponent)

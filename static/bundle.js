@@ -31891,7 +31891,9 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var SupsModule = _angular2.default.module('sups', ['ngResource']).factory('supsAPIService', _supsApi2.default).component('supsPage', _supsPage2.default).component('supsEdit', _supsEdit2.default).component('supsItem', _supsItem2.default);
+	var SupsModule = _angular2.default.module('sups', ['ngResource']).config(function ($resourceProvider) {
+	    $resourceProvider.defaults.stripTrailingSlashes = false;
+	}).factory('supsAPIService', _supsApi2.default).component('supsPage', _supsPage2.default).component('supsEdit', _supsEdit2.default).component('supsItem', _supsItem2.default);
 	
 	exports.default = SupsModule;
 
@@ -32816,6 +32818,8 @@
 	    value: true
 	});
 	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
 	function SupsPageController(supsAPIService, $interval) {
 	    var ctrl = this;
 	
@@ -32829,7 +32833,9 @@
 	    $interval(getSups, 5000);
 	
 	    ctrl.saveSup = function saveSup(editedSup) {
-	        alert(editedSup.text);
+	        supsAPIService.sups.save(editedSup).$promise.then(function (savedSup) {
+	            ctrl.sups = [savedSup].concat(_toConsumableArray(ctrl.sups));
+	        });
 	    };
 	}
 	
@@ -32921,7 +32927,7 @@
 /* 14 */
 /***/ function(module, exports) {
 
-	module.exports = "<form ng-submit=\"supsEditCtrl.saveSup()\">\n    <div class=\"form-group\">\n        <label>\n            Sup text\n        </label>\n        <textarea ng-model=\"supsEditCtrl.editedSup.text\" class=\"form-control\"></textarea>\n    </div>\n    <button class=\"btn btn-primary\" type=\"submit\">\n        Save sup\n    </button>\n</form>"
+	module.exports = "<form ng-submit=\"supsEditCtrl.saveSup()\">\n    <div class=\"form-group\">\n        <label>\n            Sup text\n        </label>\n        <textarea \n            ng-model=\"supsEditCtrl.editedSup.text\"\n            class=\"form-control\"\n        ></textarea>\n    </div>\n    <button class=\"btn btn-primary\" type=\"submit\">\n        Save sup\n    </button>\n</form>"
 
 /***/ },
 /* 15 */

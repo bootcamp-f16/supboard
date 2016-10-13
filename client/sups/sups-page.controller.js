@@ -12,7 +12,12 @@ function SupsPageController(supsAPIService, $interval) {
     $interval(getSups, 5000);
 
     ctrl.saveSup = function saveSup(editedSup) {
-        alert(editedSup.text);
+        supsAPIService.sups.save(editedSup).$promise.then((savedSup) => {
+            ctrl.sups = [
+                savedSup,
+                ...ctrl.sups,
+            ];
+        });
     };
 }
 
