@@ -1,5 +1,5 @@
 
-function SupsPageController(supsAPIService, $interval) {
+function SupsPageController(supsAPIService, flashesService, $interval) {
     const ctrl = this;
     ctrl.editedSup = {};
 
@@ -19,6 +19,7 @@ function SupsPageController(supsAPIService, $interval) {
                 ...ctrl.sups,
             ];
             ctrl.editedSup = {};
+            flashesService.displayMessage('Sup Created!', 'success');
         });
     };
 }
