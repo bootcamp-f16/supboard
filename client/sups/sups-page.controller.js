@@ -1,11 +1,15 @@
 
-function SupsPageController() {
+function SupsPageController(supsAPIService, $interval) {
     const ctrl = this;
 
-    ctrl.sup = {
-        text: 'Hey from Sups Page?',
-        created_date: new Date(Date.now()),
-    };
+    function getSups() {
+        supsAPIService.sups.get().$promise.then((data) => {
+            ctrl.sups = data.results;
+        });
+    }
+
+    getSups();
+    $interval(getSups, 5000);
 }
 
 export default SupsPageController;
