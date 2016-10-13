@@ -6,6 +6,7 @@ const supsEditComponent = {
     template,
     bindings: {
         save: '&',
+        sup: '<',
     },
     controller: SupsEditController,
     controllerAs: 'supsEditCtrl',
