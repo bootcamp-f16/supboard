@@ -8,14 +8,19 @@
             class="form-control"
         ></textarea>
     </div>
-    <button class="btn btn-primary" type="submit">
+    <button
+        class="btn btn-primary"
+        type="submit"
+        ng-disabled="!supsEditCtrl.editedSup.text"
+    >
         Save sup
     </button>
     <button
         class="btn btn-danger"
         type="button"
         ng-show="supsEditCtrl.cancel"
-        ng-click="supsEditCtrl.cancel()">
+        ng-click="supsEditCtrl.cancel()"
+    >
         Cancel
     </button>
 </form>

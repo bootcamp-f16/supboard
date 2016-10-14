@@ -1,3 +1,6 @@
+body {
+    overflow-x: hidden;
+}
 
 flashes {
     display: block !important;
@@ -8,4 +11,50 @@ flashes {
 
 .sups-item .panel-footer {
     min-height: 55px;
+}
+
+flashes .alert.ng-enter {
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    transform: translate(-200px, 0);
+}
+
+flashes .alert.ng-enter-active {
+  transform: translate(0, 0);
+}
+
+flashes .alert.ng-leave {
+  -webkit-transition: 0.3s ease-out;
+  transition: 0.3s ease-out;
+  
+  transform: translate(0, 0);
+}
+
+flashes .alert.ng-leave-active {
+    transform: translate(-200px, 0);
+}
+
+sups-item {
+    display: block !important;
+}
+
+sups-item.ng-enter {
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    transform: translate(0, -1000%);
+}
+
+sups-item.ng-enter-active {
+  transform: translate(0, 0);
+}
+
+sups-item.ng-leave {
+  -webkit-transition: 0.3s ease-out;
+  transition: 0.3s ease-out;
+  
+  transform: translate(0, 0);
+}
+
+sups-item.ng-leave-active {
+    transform: translate(100%, 0);
 }
