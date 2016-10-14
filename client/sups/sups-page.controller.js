@@ -24,6 +24,12 @@ function SupsPageController(supsAPIService, flashesService, $interval) {
         });
     };
 
+    ctrl.updateSup = function updateSup(supToUpdate) {
+        supsAPIService.sups.update(supToUpdate).$promise.then(() => {
+            flashesService.displayMessage('Sup updated!', 'success');
+        });
+    };
+
     ctrl.deleteSup = function deleteSup(supToDelete) {
         const findSup = findIndex(item => supToDelete.id === item.id);
         const index = findSup(ctrl.sups);

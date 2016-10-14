@@ -32931,7 +32931,7 @@
 /* 13 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"row\">\n    <div class=\"col-md-4\">\n        <div class=\"jumbotron\">\n            <h1>Sup</h1>\n            <p class=\"lead\">\n                View the latest sups from about the world or add yours to the mix below.\n            </p>\n            <sups-edit\n                sup=\"supsPageCtrl.editedSup\"\n                save=\"supsPageCtrl.saveSup(editedSup)\"\n            />\n        </div>\n    </div>\n    <div class=\"col-md-8\">\n        <h2>\n            Latest Sups\n            <hr>\n        </h2>\n\n        <sups-item \n            ng-repeat=\"sup in supsPageCtrl.sups track by sup.id\"\n            sup=\"sup\"\n            delete=\"supsPageCtrl.deleteSup(supToDelete)\"\n        />\n    </div>\n</div>"
+	module.exports = "<div class=\"row\">\n    <div class=\"col-md-4\">\n        <div class=\"jumbotron\">\n            <h1>Sup</h1>\n            <p class=\"lead\">\n                View the latest sups from about the world or add yours to the mix below.\n            </p>\n            <sups-edit\n                sup=\"supsPageCtrl.editedSup\"\n                save=\"supsPageCtrl.saveSup(editedSup)\"\n            />\n        </div>\n    </div>\n    <div class=\"col-md-8\">\n        <h2>\n            Latest Sups\n            <hr>\n        </h2>\n\n        <sups-item \n            ng-repeat=\"sup in supsPageCtrl.sups track by sup.id\"\n            sup=\"sup\"\n            delete=\"supsPageCtrl.deleteSup(supToDelete)\"\n            update=\"supsPageCtrl.updateSup(supToUpdate)\"\n        />\n    </div>\n</div>"
 
 /***/ },
 /* 14 */
@@ -32965,6 +32965,12 @@
 	            ctrl.sups = [savedSup].concat(_toConsumableArray(ctrl.sups));
 	            ctrl.editedSup = {};
 	            flashesService.displayMessage('Sup Created!', 'success');
+	        });
+	    };
+	
+	    ctrl.updateSup = function updateSup(supToUpdate) {
+	        supsAPIService.sups.update(supToUpdate).$promise.then(function () {
+	            flashesService.displayMessage('Sup updated!', 'success');
 	        });
 	    };
 	
@@ -41847,7 +41853,8 @@
 	    template: _supsItem2.default,
 	    bindings: {
 	        sup: '<',
-	        delete: '&'
+	        delete: '&',
+	        update: '&'
 	    },
 	    controller: _supsItem4.default,
 	    controllerAs: 'supsItemCtrl'
@@ -41859,24 +41866,41 @@
 /* 17 */
 /***/ function(module, exports) {
 
-	module.exports = "<div \n    class=\"panel panel-default sups-item\"\n    ng-mouseover=\"supsItemCtrl.setShowControls(true)\"\n    ng-mouseout=\"supsItemCtrl.setShowControls(false)\"\n>\n    <div class=\"panel-body\">\n        {{ supsItemCtrl.sup.text }}\n    </div>\n    <div class=\"panel-footer clearfix\">\n        <div class=\"pull-right\">\n            {{ supsItemCtrl.sup.created_date | date:'medium'}}\n        </div>\n        <div class=\"sups-item-controls\" ng-show=\"supsItemCtrl.showControls\">\n            <button class=\"btn btn-default\">\n                <i class=\"fa fa-pencil-square-o\"></i>\n            </button>\n            <button class=\"btn btn-danger\" ng-click=\"supsItemCtrl.deleteSup()\">\n                <i class=\"fa fa-trash-o\"></i>\n            </button>\n        </div>\n    </div>\n</div>"
+	module.exports = "<div \n    class=\"panel panel-default sups-item\"\n    ng-mouseover=\"supsItemCtrl.setShowControls(true)\"\n    ng-mouseout=\"supsItemCtrl.setShowControls(false)\"\n>\n    <div class=\"panel-body\">\n        <p class=\"lead\" ng-show=\"!supsItemCtrl.editMode\">\n            {{ supsItemCtrl.sup.text }}\n        </p>\n        <sups-edit\n            ng-show=\"supsItemCtrl.editMode\"\n            sup=\"supsItemCtrl.supToEdit\"\n            save=\"supsItemCtrl.editSup(editedSup)\"\n            cancel=\"supsItemCtrl.setEditMode(false)\"\n        />\n    </div>\n    <div class=\"panel-footer clearfix\">\n        <div class=\"pull-right\">\n            {{ supsItemCtrl.sup.created_date | date:'medium'}}\n        </div>\n        <div class=\"sups-item-controls\" ng-show=\"supsItemCtrl.showControls\">\n            <button class=\"btn btn-default\" ng-click=\"supsItemCtrl.setEditMode(true)\">\n                <i class=\"fa fa-pencil-square-o\"></i>\n            </button>\n            <button class=\"btn btn-danger\" ng-click=\"supsItemCtrl.deleteSup()\">\n                <i class=\"fa fa-trash-o\"></i>\n            </button>\n        </div>\n    </div>\n</div>"
 
 /***/ },
 /* 18 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
 	
+	var _ramda = __webpack_require__(15);
+	
 	function SupsItemController() {
 	    var ctrl = this;
 	    ctrl.showControls = false;
+	    ctrl.editMode = false;
+	    ctrl.supToEdit = {};
 	
 	    ctrl.setShowControls = function setShowControls(showControls) {
 	        ctrl.showControls = showControls;
+	    };
+	
+	    ctrl.setEditMode = function setEditMode(editMode) {
+	        ctrl.editMode = editMode;
+	
+	        // merge probably not necessary
+	        ctrl.supToEdit = (0, _ramda.merge)({}, ctrl.sup);
+	    };
+	
+	    ctrl.editSup = function editSup(supToEdit) {
+	        ctrl.update({ supToUpdate: supToEdit });
+	        ctrl.sup = supToEdit;
+	        ctrl.editMode = false;
 	    };
 	
 	    ctrl.deleteSup = function deleteSup() {
@@ -41909,8 +41933,10 @@
 	var supsEditComponent = {
 	    template: _supsEdit2.default,
 	    bindings: {
+	        sup: '<',
 	        save: '&',
-	        sup: '<'
+	        // ? allows callback to be undefined
+	        cancel: '&?'
 	    },
 	    controller: _supsEdit4.default,
 	    controllerAs: 'supsEditCtrl'
@@ -41922,7 +41948,7 @@
 /* 20 */
 /***/ function(module, exports) {
 
-	module.exports = "<form ng-submit=\"supsEditCtrl.saveSup()\">\n    <div class=\"form-group\">\n        <label>\n            Sup text\n        </label>\n        <textarea \n            ng-model=\"supsEditCtrl.editedSup.text\"\n            class=\"form-control\"\n        ></textarea>\n    </div>\n    <button class=\"btn btn-primary\" type=\"submit\">\n        Save sup\n    </button>\n</form>"
+	module.exports = "<form ng-submit=\"supsEditCtrl.saveSup()\">\n    <div class=\"form-group\">\n        <label>\n            Sup text\n        </label>\n        <textarea \n            ng-model=\"supsEditCtrl.editedSup.text\"\n            class=\"form-control\"\n        ></textarea>\n    </div>\n    <button class=\"btn btn-primary\" type=\"submit\">\n        Save sup\n    </button>\n    <button\n        class=\"btn btn-danger\"\n        type=\"button\"\n        ng-show=\"supsEditCtrl.cancel\"\n        ng-click=\"supsEditCtrl.cancel()\">\n        Cancel\n    </button>\n</form>"
 
 /***/ },
 /* 21 */
@@ -41964,7 +41990,13 @@
 	
 	function supsAPIService($resource) {
 	    var api = {
-	        sups: $resource('/api/sups/:id/')
+	        sups: $resource('/api/sups/:id/',
+	        // maps a .id on our object to the url above
+	        { id: '@id' }, {
+	            update: {
+	                method: 'PUT'
+	            }
+	        })
 	    };
 	
 	    return api;

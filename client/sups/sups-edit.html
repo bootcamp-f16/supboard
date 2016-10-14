@@ -11,4 +11,11 @@
     <button class="btn btn-primary" type="submit">
         Save sup
     </button>
+    <button
+        class="btn btn-danger"
+        type="button"
+        ng-show="supsEditCtrl.cancel"
+        ng-click="supsEditCtrl.cancel()">
+        Cancel
+    </button>
 </form>
