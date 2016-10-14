@@ -41941,6 +41941,7 @@
 	    ctrl.editedSup = {};
 	
 	    ctrl.$onChanges = function $onChanges() {
+	        // Creates a copy of the ctrl.sup object
 	        ctrl.editedSup = (0, _ramda.merge)({}, ctrl.sup);
 	    };
 	
