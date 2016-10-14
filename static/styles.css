@@ -1,7 +1,11 @@
 
 flashes {
     display: block !important;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     z-index: 20000;
+}
+
+.sups-item .panel-footer {
+    min-height: 55px;
 }

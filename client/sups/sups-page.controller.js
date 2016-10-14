@@ -1,3 +1,4 @@
+import { findIndex } from 'ramda';
 
 function SupsPageController(supsAPIService, flashesService, $interval) {
     const ctrl = this;
@@ -20,6 +21,19 @@ function SupsPageController(supsAPIService, flashesService, $interval) {
             ];
             ctrl.editedSup = {};
             flashesService.displayMessage('Sup Created!', 'success');
+        });
+    };
+
+    ctrl.deleteSup = function deleteSup(supToDelete) {
+        const findSup = findIndex(item => supToDelete.id === item.id);
+        const index = findSup(ctrl.sups);
+
+        if (index !== -1) {
+            ctrl.sups.splice(index, 1);
+        }
+
+        supsAPIService.sups.delete(supToDelete).$promise.then(() => {
+            flashesService.displayMessage('Sup Deleted', 'success');
         });
     };
 }

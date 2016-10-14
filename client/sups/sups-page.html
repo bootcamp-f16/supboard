@@ -17,6 +17,10 @@
             <hr>
         </h2>
 
-        <sups-item ng-repeat="sup in supsPageCtrl.sups" sup="sup" />
+        <sups-item 
+            ng-repeat="sup in supsPageCtrl.sups track by sup.id"
+            sup="sup"
+            delete="supsPageCtrl.deleteSup(supToDelete)"
+        />
     </div>
 </div>
