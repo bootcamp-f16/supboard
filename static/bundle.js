@@ -41974,7 +41974,7 @@
 /* 24 */
 /***/ function(module, exports) {
 
-	module.exports = "<header>\n    <nav class=\"navbar navbar-inverse navbar-static-top\">\n        <div class=\"container-fluid\">\n            <div class=\"navbar-header\">\n                <span class=\"navbar-brand\">\n                    <i class=\"fa fa-thumbs-o-up\"></i> Supboard\n                </span>\n            </div>\n        </div>\n    </nav>\n</header>\n<div class=\"container-fluid\">\n    <div class=\"row\">\n        <div class=\"col-md-4 col-md-offset-4\">\n            <flashes />\n        </div>\n    </div>\n    <sups-page />\n</div>"
+	module.exports = "<header>\n    <nav class=\"navbar navbar-inverse navbar-static-top\">\n        <div class=\"container-fluid\">\n            <div class=\"navbar-header\">\n                <span class=\"navbar-brand\">\n                    <i class=\"fa fa-thumbs-o-up\"></i> Supboard\n                </span>\n            </div>\n        </div>\n    </nav>\n</header>\n<div class=\"container-fluid\">\n    <flashes />\n    <sups-page />\n</div>"
 
 /***/ },
 /* 25 */
