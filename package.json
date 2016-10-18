@@ -3,14 +3,20 @@
   "version": "1.0.0",
   "description": "Short posts broadcasted to the world",
   "repository": "https://github.com/bootcamp-f16/supboard",
+  "engines": {
+    "node": "6.8.1"
+  },
   "scripts": {
     "start": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "eslint": "eslint"
+    "eslint": "eslint",
+    "postinstall": "gulp webpack"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+  },
+  "dependencies": {
     "babel-core": "^6.17.0",
     "babel-eslint": "^7.0.0",
     "babel-loader": "^6.2.5",
@@ -23,9 +29,7 @@
     "gulp": "^3.9.1",
     "raw-loader": "^0.5.1",
     "webpack": "^1.13.2",
-    "webpack-stream": "^3.2.0"
-  },
-  "dependencies": {
+    "webpack-stream": "^3.2.0",
     "angular": "^1.5.8",
     "angular-animate": "^1.5.8",
     "angular-resource": "^1.5.8",
