@@ -10,7 +10,7 @@
     "start": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "eslint",
-    "docco": "docco-husky client/*.js client/**/*.js core/*.py api/*.py sups/*.py",
+    "docco": "docco-husky client/*.js client/**/*.js core/*.py api/*.py sups/*.py conf/*.py",
     "postinstall": "gulp webpack"
   },
   "author": "",
@@ -38,7 +38,7 @@
     "webpack-stream": "^3.2.0"
   },
   "docco_husky": {
-    "output_dir": "static/docs/",
+    "output_dir": "static/docs",
     "project_name": "Supboard",
     "show_timestamp": true
   }
