@@ -3,11 +3,14 @@
 # Django REST Framework provides a built in router to make constructing the URLs easy.
 # See 
 # [http://www.django-rest-framework.org/api-guide/routers/](http://www.django-rest-framework.org/api-guide/routers/)
-# for more details
+# for more details.
 
+
+#
 from django.conf.urls import include, url
 from rest_framework import routers
 
+# Import the viewsets to use with the router.
 from sups.viewsets import SupViewSet
 
 # `router` generates the url patterns for us.
