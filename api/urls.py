@@ -5,7 +5,6 @@
 # [http://www.django-rest-framework.org/api-guide/routers/](http://www.django-rest-framework.org/api-guide/routers/)
 # for more details.
 
-
 #
 from django.conf.urls import include, url
 from rest_framework import routers
