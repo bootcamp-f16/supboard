@@ -10,8 +10,8 @@
     "start": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1",
     "eslint": "eslint",
-    "docco": "docco-husky client/*.js client/**/*.js",
-    "postinstall": "gulp webpack"
+    "docco": "docco-husky client/*.js client/**/*.js core/*.py api/*.py sups/*.py",
+    "postinstall": "gulp webpack && npm run docco"
   },
   "author": "",
   "license": "ISC",
