@@ -51,5 +51,5 @@ export default flashesService;
 // * [flashes.module.js](flashes.module.js.html) - Registering `flashesService` with the
 // flashes Angular Module.
 // * [flashes.controller.js](flashes.controller.js.html) - Usage of the flashes array.
-// * [sups-page.controller.js](../sups-page.controller.js.html) -
+// * [sups-page.controller.js](../sups/sups-page.controller.js.html) -
 // Usage of the displayMessage function.
