@@ -7,7 +7,11 @@
             ng-model="supsEditCtrl.editedSup.text"
             class="form-control"
         ></textarea>
+        <div class="button" ngf-select ng-model="supsEditCtrl.file" name="file" ngf-pattern="'image/*'"
+          ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
+          ngf-resize="{width: 100, height: 100}">Select</div>
     </div>
+     <img ng-show="supsEditCtrl.file" ngf-thumbnail="supsEditCtrl.file">
     <button
         class="btn btn-primary"
         type="submit"
