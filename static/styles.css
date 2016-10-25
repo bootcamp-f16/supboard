@@ -58,3 +58,10 @@ sups-item.ng-leave {
 sups-item.ng-leave-active {
     transform: translate(100%, 0);
 }
+
+.thumbnail-preview {
+  height: 100px;
+  width: 100px;
+  display: table-cell;
+  vertical-align: middle;
+}

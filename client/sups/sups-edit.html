@@ -1,5 +1,21 @@
 <form ng-submit="supsEditCtrl.saveSup()">
     <div class="form-group">
+        <div class="btn btn-default" ngf-select ng-model="supsEditCtrl.file"
+            ngf-pattern="'image/*'"
+            ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
+            ngf-resize="{width: 100, height: 100}"
+        >
+            <div class="thumbnail-preview"
+                ngf-thumbnail="supsEditCtrl.file"
+                ngf-as-background="true"
+            >
+            </div>
+            <div ng-show="!supsEditCtrl.file" class="thumbnail-preview">
+                Add thumbnail
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
         <label>
             Sup text
         </label>
@@ -7,11 +23,7 @@
             ng-model="supsEditCtrl.editedSup.text"
             class="form-control"
         ></textarea>
-        <div class="button" ngf-select ng-model="supsEditCtrl.file" name="file" ngf-pattern="'image/*'"
-          ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
-          ngf-resize="{width: 100, height: 100}">Select</div>
     </div>
-     <img ng-show="supsEditCtrl.file" ngf-thumbnail="supsEditCtrl.file">
     <button
         class="btn btn-primary"
         type="submit"
